@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :cryptofolio, Cryptofolio.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "ubuntu",
+  password: "",
   database: "cryptofolio_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
