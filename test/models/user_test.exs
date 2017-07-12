@@ -3,8 +3,8 @@ defmodule Cryptofolio.UserTest do
 
   alias Cryptofolio.User
 
-  @valid_attrs %{email: "some content", encrypted_password: "some content", password: "some content", username: "some content"}
-  @invalid_attrs %{}
+  @valid_attrs %{email: "test@gmail.com", password: "teste123", username: "testuser"}
+  @invalid_attrs %{email: "notemail", password: "tes", username: ""}
 
   test "changeset with valid attributes" do
     changeset = User.changeset(%User{}, @valid_attrs)
