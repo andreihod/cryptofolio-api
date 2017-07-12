@@ -10,6 +10,8 @@ jobs:
         environment:
           MIX_ENV: test
       - image: postgres:9.5
+        environment:
+          POSTGRES_USER: ubuntu
 
     working_directory: ~/repo
     steps:
