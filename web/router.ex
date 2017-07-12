@@ -20,7 +20,9 @@ defmodule Cryptofolio.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Cryptofolio do
-  #   pipe_through :api
-  # end
+  scope "/api", Cryptofolio do
+     pipe_through :api
+
+     resources "/users", UserController, only: [:show, :create, :update]
+  end
 end

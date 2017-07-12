@@ -17,3 +17,6 @@ config :cryptofolio, Cryptofolio.Repo,
   database: "cryptofolio_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# Reduce the rounds so it does not slow down the tests
+config :comeonin, :bcrypt_log_rounds, 4
