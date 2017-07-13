@@ -1,4 +1,4 @@
-# cryptofolio-api
+# cryptofolio-api ![alt text](https://circleci.com/gh/andreihod/cryptofolio-api/tree/master.svg?style=shield&circle-token=7c62b9d721736c0de147428df6c248b03cfce2e1 "Build Status")
 
 To start your CryptoFolio server:
 
