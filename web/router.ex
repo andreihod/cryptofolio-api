@@ -9,6 +9,11 @@ defmodule Cryptofolio.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "Bearer"
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -21,8 +26,14 @@ defmodule Cryptofolio.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", Cryptofolio do
-     pipe_through :api
+     pipe_through [:api, :api_auth]
 
-     resources "/users", UserController, only: [:show, :create, :update]
+     post "/auth/signup", AuthController, :signup
+     post "/auth/login", AuthController, :login
+     post "/auth/logout", AuthController, :logout
+
+     get "/users/me", UserController, :me
+     put "/users/me", UserController, :update
+
   end
 end
