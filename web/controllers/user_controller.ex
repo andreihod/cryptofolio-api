@@ -1,16 +1,17 @@
 defmodule Cryptofolio.UserController do
   use Cryptofolio.Web, :controller
+  plug Guardian.Plug.EnsureAuthenticated, handler: Cryptofolio.AuthController
 
   alias Cryptofolio.User
 
-  def me(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+  def me(conn, _params) do
+    user = Guardian.Plug.current_resource(conn)
     render(conn, "show.json", user: user)
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get!(User, id)
-    changeset = User.changeset(user, user_params)
+  def update(conn, %{"user" => user_params}) do
+    user = Guardian.Plug.current_resource(conn)
+    changeset = User.update_changeset(user, user_params)
 
     case Repo.update(changeset) do
       {:ok, user} ->

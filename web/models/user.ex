@@ -13,20 +13,30 @@ defmodule Cryptofolio.User do
     timestamps()
   end
 
-  @required_fields ~w(username email password)
-
   @doc """
   Builds a changeset based on the `struct` and `params`.
   """
-  def changeset(struct, params \\ %{}) do
+  def insert_changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, @required_fields)
+    |> cast(params, [:username, :email, :password])
     |> validate_required([:username, :email, :password])
+    |> shared_changeset()
+  end
+
+  def update_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:username, :email, :password])
+    |> validate_required([:username, :email])
+    |> shared_changeset()
+  end
+
+  defp shared_changeset(changeset) do
+    changeset
+    |> validate_length(:password, min: 5)
+    |> hash_password()
     |> unique_constraint(:username)
     |> unique_constraint(:email)
     |> validate_format(:email, ~r/@/)
-    |> validate_length(:password, min: 5)
-    |> hash_password
   end
 
   defp hash_password(changeset) do

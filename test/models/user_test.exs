@@ -7,12 +7,15 @@ defmodule Cryptofolio.UserTest do
   @invalid_attrs %{email: "notemail", password: "tes", username: ""}
 
   test "changeset with valid attributes" do
-    changeset = User.changeset(%User{}, @valid_attrs)
+    changeset = User.insert_changeset(%User{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = User.changeset(%User{}, @invalid_attrs)
+    changeset = User.insert_changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  # TO-DO create update tests
+
 end

@@ -5,7 +5,7 @@ defmodule Cryptofolio.AuthController do
   alias Comeonin.Bcrypt
 
   def signup(conn, %{"user" => user_params}) do
-    changeset = User.changeset(%User{}, user_params)
+    changeset = User.insert_changeset(%User{}, user_params)
 
     case Repo.insert(changeset) do
       {:ok, user} ->
@@ -21,7 +21,6 @@ defmodule Cryptofolio.AuthController do
   end
 
   def login(conn, %{"user" => user_params}) do
-    IO.inspect(user_params)
     case find_and_confirm_password(user_params) do
       {:ok, user} ->
          new_conn = Guardian.Plug.api_sign_in(conn, user)
@@ -40,12 +39,10 @@ defmodule Cryptofolio.AuthController do
     end
   end
 
-  #TO-DO Logout
-  def logout(conn, _params) do
-    jwt = Guardian.Plug.current_token(conn)
-    claims = Guardian.Plug.claims(conn)
-    Guardian.revoke!(jwt, claims)
-    render "message.json", message: "Bye"
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(401)
+    |> render(Cryptofolio.AuthView, "message.json", message: "Authentication required")
   end
 
   defp find_and_confirm_password(%{"password" => password, "username_or_email" => login}) do
