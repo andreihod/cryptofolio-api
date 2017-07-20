@@ -38,5 +38,8 @@ defmodule Cryptofolio.Endpoint do
     key: "_cryptofolio_key",
     signing_salt: "Q4ze4jJa"
 
+  # Enable CORS
+  plug CORSPlug
+
   plug Cryptofolio.Router
 end
