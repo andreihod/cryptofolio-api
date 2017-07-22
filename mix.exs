@@ -19,7 +19,7 @@ defmodule Cryptofolio.Mixfile do
   def application do
     [mod: {Cryptofolio, []},
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin]]
+                    :phoenix_ecto, :postgrex, :comeonin, :guardian, :cors_plug]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +40,8 @@ defmodule Cryptofolio.Mixfile do
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 3.2"},
      {:guardian, "~> 0.14"},
-     {:cors_plug, "~> 1.2"}]
+     {:cors_plug, "~> 1.2"},
+     {:distillery, "~> 1.4", runtime: false}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
