@@ -18,14 +18,8 @@ defmodule Cryptofolio.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Cryptofolio do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-  end
-
   # Other scopes may use custom stacks.
-  scope "/api", Cryptofolio do
+  scope "/api/v1", Cryptofolio do
      pipe_through [:api, :api_auth]
 
      post "/auth/signup", AuthController, :signup
