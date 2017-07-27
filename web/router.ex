@@ -29,5 +29,8 @@ defmodule Cryptofolio.Router do
      get "/users/me", UserController, :me
      put "/users/me", UserController, :update
 
+     get "/exchanges", ExchangeController, :index
+     get "/exchanges/:id", ExchangeController, :show
+
   end
 end
