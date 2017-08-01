@@ -20,3 +20,6 @@ config :cryptofolio, Cryptofolio.Repo,
 
 # Reduce the rounds so it does not slow down the tests
 config :comeonin, :bcrypt_log_rounds, 4
+
+# import the local test config if exists
+import_config "test.local.exs"
