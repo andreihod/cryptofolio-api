@@ -32,5 +32,8 @@ defmodule Cryptofolio.Router do
      get "/exchanges", ExchangeController, :index
      get "/exchanges/:id", ExchangeController, :show
 
+     get "/coins", CoinController, :index
+     get "/coins/:id", CoinController, :show
+
   end
 end

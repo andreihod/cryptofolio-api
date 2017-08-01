@@ -12,8 +12,10 @@
 
 alias Cryptofolio.Repo
 alias Cryptofolio.Exchange
+alias Cryptofolio.Coin
 
 Repo.delete_all(Exchange)
+Repo.delete_all(Coin)
 
 Repo.insert! %Exchange{
   id: 1,
@@ -34,4 +36,16 @@ Repo.insert! %Exchange{
   name: "Poloniex",
   market_from: "BTC",
   market_to: "ETH"
+}
+
+Repo.insert! %Coin{
+  id: 1,
+  name: "Bitcoin",
+  symbol: "BTC"
+}
+
+Repo.insert! %Coin{
+  id: 2,
+  name: "Ethereum",
+  symbol: "ETH"
 }
