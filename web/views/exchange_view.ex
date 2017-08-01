@@ -2,11 +2,11 @@ defmodule Cryptofolio.ExchangeView do
   use Cryptofolio.Web, :view
 
   def render("index.json", %{exchanges: exchanges}) do
-    %{data: render_many(exchanges, Cryptofolio.ExchangeView, "exchange.json")}
+    render_many(exchanges, Cryptofolio.ExchangeView, "show.json")
   end
 
   def render("show.json", %{exchange: exchange}) do
-    %{data: render_one(exchange, Cryptofolio.ExchangeView, "exchange.json")}
+    %{exchange: render_one(exchange, Cryptofolio.ExchangeView, "exchange.json")}
   end
 
   def render("exchange.json", %{exchange: exchange}) do

@@ -7,7 +7,7 @@ defmodule Cryptofolio.ExchangeControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, exchange_path(conn, :index)
-    assert json_response(conn, 200)["data"] == []
+    assert json_response(conn, 200) == []
   end
 
 end
