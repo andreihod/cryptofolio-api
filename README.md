@@ -8,3 +8,5 @@ To start your CryptoFolio server:
   * Start Phoenix endpoint with `mix phoenix.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+You can visit [`Apiary`](http://docs.cryptofolio.apiary.io/#reference) for more references.
