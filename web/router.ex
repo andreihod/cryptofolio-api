@@ -36,5 +36,7 @@ defmodule Cryptofolio.Router do
      get "/coins/:id", CoinController, :show
      get "/coins/:id/exchanges", CoinController, :exchanges
 
+     resources "/assets", AssetController, except: [:edit, :new]
+
   end
 end

@@ -1,7 +1,5 @@
 defmodule Cryptofolio.ExchangeController do
   use Cryptofolio.Web, :controller
-  # uncomment if authentication becomes required
-  # plug Guardian.Plug.EnsureAuthenticated, handler: Cryptofolio.AuthController
 
   alias Cryptofolio.Exchange
 

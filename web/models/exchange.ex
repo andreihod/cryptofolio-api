@@ -6,6 +6,7 @@ defmodule Cryptofolio.Exchange do
     field :market_from, :string
     field :market_to, :string
     field :price, :decimal
+    has_many :assets, Cryptofolio.Asset
 
     timestamps()
   end

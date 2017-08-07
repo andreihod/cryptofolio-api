@@ -22,4 +22,7 @@ config :cryptofolio, Cryptofolio.Repo,
 config :comeonin, :bcrypt_log_rounds, 4
 
 # import the local test config if exists
-import_config "test.local.exs"
+test_local_config = "./config/test.local.exs"
+if File.exists?(test_local_config) do
+  import_config "test.local.exs"
+end

@@ -9,6 +9,7 @@ defmodule Cryptofolio.User do
     field :email, :string
     field :password, :string, virtual: true
     field :encrypted_password, :string
+    has_many :assets, Cryptofolio.Asset
 
     timestamps()
   end

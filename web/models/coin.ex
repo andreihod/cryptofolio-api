@@ -4,6 +4,7 @@ defmodule Cryptofolio.Coin do
   schema "coins" do
     field :name, :string
     field :symbol, :string
+    has_many :assets, Cryptofolio.Asset
 
     timestamps()
   end
