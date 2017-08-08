@@ -14,6 +14,7 @@ defmodule Cryptofolio.Asset do
   Builds a changeset based on the `struct` and `params`.
   """
   def changeset(struct, params \\ %{}) do
+    IO.inspect params
     struct
     |> cast(params, [:mybalance, :user_id, :exchange_id, :coin_id])
     |> assoc_constraint(:user)
@@ -21,4 +22,5 @@ defmodule Cryptofolio.Asset do
     |> assoc_constraint(:coin)
     |> validate_required([:mybalance])
   end
+
 end

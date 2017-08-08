@@ -17,6 +17,7 @@ defmodule Cryptofolio.AssetController do
   def create(conn, %{"asset" => asset_params}) do
     user = Guardian.Plug.current_resource(conn)
     new_asset = build_assoc(user, :assets)
+    asset_params = load_assocs_ids(asset_params)
     changeset = Asset.changeset(new_asset, asset_params)
 
     case Repo.insert(changeset) do
@@ -45,6 +46,7 @@ defmodule Cryptofolio.AssetController do
   def update(conn, %{"id" => id, "asset" => asset_params}) do
     user = Guardian.Plug.current_resource(conn)
     asset = Repo.get!(Asset, id)
+    asset_params = load_assocs_ids(asset_params)
     changeset = Asset.changeset(asset, asset_params)
 
     case Repo.update(changeset) do
@@ -70,6 +72,13 @@ defmodule Cryptofolio.AssetController do
     Repo.delete!(asset)
 
     send_resp(conn, :no_content, "")
+  end
+
+  defp load_assocs_ids(asset_params) do
+    %{"coin" => coin, "exchange" => exchange} = asset_params
+    asset_params
+    |> Map.put("coin_id", coin["id"])
+    |> Map.put("exchange_id", exchange["id"])
   end
 
 end
