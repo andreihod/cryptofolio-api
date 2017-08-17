@@ -13,7 +13,7 @@ defmodule Cryptofolio do
       # Start the endpoint when the application starts
       supervisor(Cryptofolio.Endpoint, []),
       # Start your own worker by calling: Cryptofolio.Worker.start_link(arg1, arg2, arg3)
-      # worker(Cryptofolio.Worker, [arg1, arg2, arg3]),
+      worker(Cryptofolio.Poloniex, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
