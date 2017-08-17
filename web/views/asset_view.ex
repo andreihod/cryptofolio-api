@@ -12,6 +12,8 @@ defmodule Cryptofolio.AssetView do
   def render("asset.json", %{asset: asset}) do
     %{id: asset.id,
       mybalance: asset.mybalance,
+      inserted_at: asset.inserted_at,
+      updated_at: asset.updated_at,
       exchange: render_one(asset.exchange, Cryptofolio.ExchangeView, "exchange.json"),
       coin: render_one(asset.coin, Cryptofolio.CoinView, "coin.json")}
   end

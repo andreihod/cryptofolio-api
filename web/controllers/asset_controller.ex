@@ -9,6 +9,7 @@ defmodule Cryptofolio.AssetController do
     user = Guardian.Plug.current_resource(conn)
     query = from a in Asset,
             where: a.user_id == ^user.id,
+            order_by: a.inserted_at,
             preload: [:exchange, :coin]
     assets = Repo.all(query)
     render(conn, "index.json", assets: assets)
