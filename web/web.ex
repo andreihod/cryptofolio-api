@@ -72,6 +72,14 @@ defmodule Cryptofolio.Web do
     end
   end
 
+  def new_markets do
+    quote do
+      alias Cryptofolio.Repo
+      alias Cryptofolio.Exchange
+      alias Cryptofolio.Coin
+    end
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """
