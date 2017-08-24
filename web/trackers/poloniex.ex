@@ -1,10 +1,7 @@
 defmodule Cryptofolio.Poloniex do
   use GenServer
 
-  import Ecto.Query
-  import Ecto.Type
-  alias Cryptofolio.Repo
-  alias Cryptofolio.Exchange
+  alias Cryptofolio.ExchangeController
 
   @poloniex_ticker_url "https://poloniex.com/public?command=returnTicker"
 
@@ -43,21 +40,10 @@ defmodule Cryptofolio.Poloniex do
     {symbols , %{"last" => last_price}} = market
     [from, to] = Regex.split(~r{_}, symbols)
 
-    # TO-DO make only one query
-    # TO-DO put this in the model
-    query_exchange = from e in Exchange,
-      where: e.market_from == ^from and e.market_to == ^to and e.name == "Poloniex"
-
-    case Repo.one(query_exchange) do
-      nil -> {:not_supported, nil}
-      exchange -> record_last_price(exchange, last_price)
+    case ExchangeController.find_one(from, to, "Poloniex") do
+      {:not_supported, _} -> nil
+      {:supported, exchange} -> ExchangeController.refresh(exchange, last_price)
     end
-  end
-
-  defp record_last_price(exchange, last_price) do
-    {:ok, decimal_price} = cast(:decimal, Decimal.new(last_price))
-    exchange = Ecto.Changeset.change exchange, price: decimal_price
-    Repo.update exchange
   end
 
 end

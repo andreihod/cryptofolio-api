@@ -1,6 +1,7 @@
 defmodule Cryptofolio.ExchangeController do
   use Cryptofolio.Web, :controller
 
+  import Ecto.Type
   alias Cryptofolio.Exchange
 
   def index(conn, _params) do
@@ -27,6 +28,22 @@ defmodule Cryptofolio.ExchangeController do
   def show(conn, %{"id" => id}) do
     exchange = Repo.get!(Exchange, id)
     render(conn, "show.json", exchange: exchange)
+  end
+
+  def find_one(from, to, name) do
+    query_exchange = from e in Exchange,
+      where: e.market_from == ^from and e.market_to == ^to and e.name == ^name
+
+    case Repo.one(query_exchange) do
+      nil -> {:not_supported, nil}
+      exchange -> {:supported, exchange}
+    end
+  end
+
+  def refresh(exchange, last_price) do
+    {:ok, decimal_price} = cast(:decimal, Decimal.new(last_price))
+    exchange = Ecto.Changeset.change exchange, price: decimal_price
+    Repo.update exchange
   end
 
 end
