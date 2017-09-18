@@ -1,4 +1,4 @@
-defmodule :"Elixir.Cryptofolio.Repo.Migrations.New coins" do
+defmodule Elixir.Cryptofolio.Repo.Migrations.New_Coins do
   use Ecto.Migration
   use Cryptofolio.Web, :new_markets
 

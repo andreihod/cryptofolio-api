@@ -9,11 +9,6 @@ defmodule Cryptofolio.CoinControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  test "lists all entries on index", %{conn: conn} do
-    conn = get conn, coin_path(conn, :index)
-    assert json_response(conn, 200) == []
-  end
-
   test "shows chosen resource", %{conn: conn} do
     coin = Repo.insert! %Coin{}
     conn = get conn, coin_path(conn, :show, coin)
